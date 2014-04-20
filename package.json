@@ -1,0 +1,14 @@
+{
+	"name": "skeleton",
+	"dependencies": {
+		"gulp": "*",
+		"gulp-concat": "*",
+		"gulp-coffee": "*",
+		"gulp-exec": "*",
+		"gulp-less": "*",
+		"gulp-imagemin": "*",
+		"gulp-changed": "*",
+		"gulp-cached": "*",
+		"gulp-newer": "*"
+	}
+}

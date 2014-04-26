@@ -43,6 +43,13 @@
   };
 
   gulp.task('watch', function() {
+    gulp.src(src_files.modules_html).pipe(watch({
+      emit: 'one',
+      glob: src_files.modules_html,
+      emitOnGlob: false
+    }, function(files) {
+      return files.pipe(plumber()).pipe(ignore.include('**/*.html')).pipe(gulp.dest('./dist'));
+    })).on('error', function(error) {});
     gulp.src(src_files.modules_jade).pipe(watch({
       emit: 'one',
       glob: src_files.modules_jade,

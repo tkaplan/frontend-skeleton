@@ -55,17 +55,20 @@ gulp.task 'watch', () ->
   #     }, (files) ->
   #       files.pipe src_files.filter_html
   #            .pipe gulp.dest('./dist')
-
-  # gulp.src src_files.modules_jade
-  #   .pipe watch {
-  #     name: 'jade'
-  #     emit: 'one'
-  #     emmitOnGlob: false
-  #     glob: src_files.modules_jade
-  #     }, (files) ->
-  #       files.pipe src_files.filter_jade
-  #            .pipe jade()
-  #            .pipe gulp.dest('./dist')
+  gulp.src src_files.modules_html
+    .pipe watch {
+      emit: 'one'
+      glob: src_files.modules_html
+      emitOnGlob: false
+    }, (files) ->
+      files.pipe plumber()
+      .pipe ignore.include('**/*.html')
+      .pipe gulp.dest('./dist')
+    .on('error', (error) ->
+      # There is a bug in gulp-watch when deleting watched files
+      # Do nothing until they fix the bug.
+      return
+    )
 
   gulp.src src_files.modules_jade
     .pipe watch {

@@ -36,8 +36,6 @@
     modules_less: ['modules/**/views/assets/stylesheets/*.less', 'modules/**'],
     filter_less: filter(['modules/**/views/assets/stylesheets/*.less']),
     modules_coffee: ['modules/**', 'modules/**/configs/*.coffee', 'modules/**/controllers/*.coffee', 'modules/**/directives/*.coffee', 'modules/**/services/*.coffee', 'modules/**/app.coffee'],
-    grep_coffee: ['.coffee'],
-    filter_coffee: filter(['modules/**/configs/*.coffee', 'modules/**/controllers/*.coffee', 'modules/**/directives/*.coffee', 'modules/**/services/*.coffee', 'modules/**/app.coffee']),
     modules_jade: ['modules/**/views/*.jade', 'modules/**'],
     filter_jade: filter(['modules/**/views/*.jade']),
     modules_html: ['modules/**/views/*.html', 'modules/**'],
@@ -45,6 +43,13 @@
   };
 
   gulp.task('watch', function() {
+    gulp.src(src_files.modules_jade).pipe(watch({
+      emit: 'one',
+      glob: src_files.modules_jade,
+      emitOnGlob: false
+    }, function(files) {
+      return files.pipe(plumber()).pipe(ignore.include('**/*.jade')).pipe(jade()).pipe(gulp.dest('./dist'));
+    })).on('error', function(error) {});
     gulp.src(src_files.modules_coffee).pipe(watch({
       emit: 'all',
       glob: src_files.modules_coffee,

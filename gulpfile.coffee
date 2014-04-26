@@ -30,16 +30,6 @@ src_files =
     'modules/**/services/*.coffee'
     'modules/**/app.coffee'
   ]
-  grep_coffee: [
-    '.coffee'
-  ]
-  filter_coffee: filter [
-    'modules/**/configs/*.coffee'
-    'modules/**/controllers/*.coffee'
-    'modules/**/directives/*.coffee'
-    'modules/**/services/*.coffee'
-    'modules/**/app.coffee'
-  ]
   modules_jade: [
     'modules/**/views/*.jade'
     'modules/**'
@@ -77,6 +67,21 @@ gulp.task 'watch', () ->
   #            .pipe jade()
   #            .pipe gulp.dest('./dist')
 
+  gulp.src src_files.modules_jade
+    .pipe watch {
+      emit: 'one'
+      glob: src_files.modules_jade
+      emitOnGlob: false
+    }, (files) ->
+      files.pipe plumber()
+      .pipe ignore.include('**/*.jade')
+      .pipe jade()
+      .pipe gulp.dest('./dist')
+    .on('error', (error) ->
+      # There is a bug in gulp-watch when deleting watched files
+      # Do nothing until they fix the bug.
+      return
+    )
   
   gulp.src src_files.modules_coffee
     .pipe watch {

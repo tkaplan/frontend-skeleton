@@ -1,9 +1,6 @@
 (function() {
-  angular.module('example-module-1', []);
+  var app;
 
-}).call(this);
-
-(function() {
-  angular.module('example-module-1', []);
+  app = angular.module('ccat', []);
 
 }).call(this);

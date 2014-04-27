@@ -11,10 +11,12 @@ argv = require('yargs').argv
 
 src_files =
   modules_less: [
+    'assets/stylesheets/*.less'
     'modules/**/views/assets/stylesheets/*.less'
     'modules/**'
   ]
   modules_coffee: [
+    'coffee/*.coffee'
     'modules/**'
     'modules/**/configs/*.coffee'
     'modules/**/controllers/*.coffee'
@@ -23,6 +25,7 @@ src_files =
     'modules/**/app.coffee'
   ]
   modules_jade: [
+    '*.jade'
     'modules/**/views/*.jade'
     'modules/**'
   ]

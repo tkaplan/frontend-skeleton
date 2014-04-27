@@ -12,7 +12,7 @@
     "yargs": "1.2.1"
   },
   "description": "Frontend Skeleton For Angular Application",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "build.js",
   "directories": {
     "test": "tests"

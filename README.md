@@ -1,12 +1,5 @@
-g4 commands
-	build -[project name]
-	module -[module name]
-	run
-		-p [production]
-		-d [development]
-		-pd/dp [production/development different ports]
-		-t
-	git module {git action commands}
-	bower module {bower commands}
-	npm module {npm commands}
-	
+#Frontend-Skeleton for Angularjs App
+## build
+		node build --module {your_module name} // Builds module skeleton
+## gulp
+		gulp watch // Watches for changes in html,jade,coffeescript, and less files

@@ -15,6 +15,6 @@
 (function() {
   var app;
 
-  app = angular.module('check2', []);
+  app = angular.module('done', []);
 
 }).call(this);

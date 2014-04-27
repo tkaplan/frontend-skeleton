@@ -46,15 +46,6 @@ src_files =
   ]
 gulp.task 'watch', () ->
 
-  # gulp.src src_files.modules_html
-  #   .pipe watch {
-  #     name: 'html'
-  #     emit: 'one'
-  #     emmitOnGlob: false
-  #     glob: src_files.modules_html
-  #     }, (files) ->
-  #       files.pipe src_files.filter_html
-  #            .pipe gulp.dest('./dist')
   gulp.src src_files.modules_html
     .pipe watch {
       emit: 'one'
@@ -114,5 +105,22 @@ gulp.task 'watch', () ->
   #            .pipe less()
   #            .pipe concat('all.css')
   #            .pipe gulp.dest('./dist')
+
+  gulp.src src_files.modules_less
+    .pipe watch {
+      emit: 'all'
+      glob: src_files.modules_less
+      emitOnGlob: false
+    }, (files) ->
+      files.pipe plumber()
+      .pipe ignore.include('**/*.less')
+      .pipe less()
+      .pipe concat('all.css')
+      .pipe gulp.dest('./dist')
+    .on('error', (error) ->
+      # There is a bug in gulp-watch when deleting watched files
+      # Do nothing until they fix the bug.
+      return
+    )
 
   return

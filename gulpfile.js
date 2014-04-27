@@ -64,6 +64,13 @@
     }, function(files) {
       return files.pipe(plumber()).pipe(ignore.include('**/*.coffee')).pipe(coffee()).pipe(concat('all.js')).pipe(gulp.dest('./dist'));
     })).on('error', function(error) {});
+    gulp.src(src_files.modules_less).pipe(watch({
+      emit: 'all',
+      glob: src_files.modules_less,
+      emitOnGlob: false
+    }, function(files) {
+      return files.pipe(plumber()).pipe(ignore.include('**/*.less')).pipe(less()).pipe(concat('all.css')).pipe(gulp.dest('./dist'));
+    })).on('error', function(error) {});
   });
 
 }).call(this);
